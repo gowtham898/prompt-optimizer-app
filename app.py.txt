@@ -1,0 +1,35 @@
+code = """
+import openai
+import streamlit as st
+
+openai.api_key = "YOUR_API_KEY"
+
+def optimize_prompt(user_prompt):
+    response = openai.chat.completions.create(
+        model="gpt-4o-mini",
+        messages=[
+            {"role": "system", "content": "You are a prompt engineering expert. Improve user prompts to be more detailed, clear, and effective."},
+            {"role": "user", "content": user_prompt}
+        ]
+    )
+    return response.choices[0].message.content
+
+st.title("Prompt Optimizer AI 🌟")
+st.write("Enter your prompt below and get an improved version!")
+
+user_input = st.text_area("Enter your prompt here:")
+
+if st.button("Optimize"):
+    if user_input.strip() != "":
+        optimized = optimize_prompt(user_input)
+        st.subheader("Optimized Prompt:")
+        st.write(optimized)
+    else:
+        st.warning("Please enter a prompt first!")
+"""
+
+# Save as app.py
+with open("app.py", "w") as f:
+    f.write(code)
+
+print("Saved app.py successfully ✅")
